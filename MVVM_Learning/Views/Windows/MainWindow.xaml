@@ -8,6 +8,12 @@
         xmlns:local="clr-namespace:MVVM_Learning"
         Title="{Binding Path=Title}" 
         Width="800" Height="450" >
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -16,11 +22,12 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <!--<MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}">/-->
-                <MenuItem Header="Exit">
+                <MenuItem Header="Exit" Command="{StaticResource CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Exit">
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
-                </MenuItem>
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>
@@ -53,7 +60,13 @@
                                RadiusX="5" RadiusY="7"/>
 
                     <Ellipse Grid.Row="1" Grid.Column="0" Margin="5,7"
-                               Stroke="Blue" Fill="Red" StrokeThickness="3"/>
+                             Stroke="Blue" Fill="Red" StrokeThickness="3"
+                             >
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}"
+                                          MouseAction="LeftDoubleClick"></MouseBinding>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
 
                     <GridSplitter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                                   HorizontalAlignment="Right" Width="4"/>
