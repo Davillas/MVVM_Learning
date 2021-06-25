@@ -14,7 +14,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit"/>
+                <MenuItem Header="Exit" />
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>
@@ -24,7 +24,7 @@
 
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem MinWidth="100" MaxWidth="300">
-                <TextBlock Text="123456"/>
+                <TextBlock Text="{Binding Status}"/>
             </StatusBarItem>
             <StatusBarItem>
                 <ProgressBar Width="120" Height="12" Value="30"/>

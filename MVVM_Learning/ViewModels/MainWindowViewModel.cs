@@ -17,5 +17,20 @@ namespace MVVM_Learning.ViewModels
             set => Set(ref _Title, value);
         }
         #endregion
+
+        #region Status : string - Program Status
+
+        /// <summary>
+        /// Program Status
+        /// </summary>
+        private string _Status = "Ready";
+
+        public string Status
+        {
+            get => _Status;
+            set => Set(ref _Status, value);
+        }
+
+        #endregion
     }
 }
