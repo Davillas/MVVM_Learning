@@ -6,6 +6,7 @@
         xmlns:cmd="clr-namespace:MVVM_Learning.Infrastructure.Commands"
         xmlns:vm="clr-namespace:MVVM_Learning.ViewModels"
         xmlns:local="clr-namespace:MVVM_Learning"
+        xmlns:oxy="http://oxyplot.org/wpf"
         Title="{Binding Path=Title}" 
         Width="800" Height="450" >
     <Window.InputBindings>
@@ -44,8 +45,8 @@
             </StatusBarItem>
         </StatusBar>
 
-        <TabControl>
-            <TabItem Header="Tab 1">
+        <TabControl SelectedIndex="">
+            <TabItem Visibility="Collapsed" Header="Tab 1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="34*"/>
@@ -74,7 +75,18 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Tab 2"></TabItem>
+            <TabItem Header="Graph">
+                <oxy:Plot>
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis Position="Left"/>
+                        <oxy:LinearAxis Position="Bottom"/>
+                    </oxy:Plot.Axes>
+                    <oxy:LineSeries Color="Red"
+                                    ItemsSource="{Binding TestDataPoints}"
+                                    DataFieldX="XValue"
+                                    DataFieldY="YValue"/>
+                </oxy:Plot>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
