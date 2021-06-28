@@ -25,6 +25,20 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        #region SelectedPageIndex : int  - Test data for visualization
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        private int _SelectedPageIndex = 0;
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        public int SelectedPageIndex { get => _SelectedPageIndex; set => Set(ref _SelectedPageIndex, value); }
+
+        #endregion
+
         #region MainWindow Title
 
         private string _Title = "Test Title";
@@ -64,6 +78,16 @@ namespace MVVM_Learning.ViewModels
         }
         #endregion
 
+        public ICommand ChangeTabIndexCommand { get; }
+
+        private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
+
+        private void OnChangeTabIndexCommandExecuted(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+
         #endregion
 
         public MainWindowViewModel()
@@ -71,6 +95,8 @@ namespace MVVM_Learning.ViewModels
             #region Commands
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
             #endregion
 
             var data_points = new List<DataPoint>((int)(360 / 0.1));

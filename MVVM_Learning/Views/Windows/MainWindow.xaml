@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cmd="clr-namespace:MVVM_Learning.Infrastructure.Commands"
         xmlns:vm="clr-namespace:MVVM_Learning.ViewModels"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:MVVM_Learning"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="{Binding Path=Title}" 
@@ -33,7 +34,17 @@
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>
             </MenuItem>
-
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"/>
+                </MenuItem.Header>
+            </MenuItem>
+           
         </Menu>
 
         <StatusBar DockPanel.Dock="Bottom">
@@ -43,10 +54,11 @@
             <StatusBarItem>
                 <ProgressBar Width="120" Height="12" Value="30"/>
             </StatusBarItem>
+            <StatusBarItem Content="{Binding SelectedPageIndex}" IsEnabled="False"/>
         </StatusBar>
 
-        <TabControl SelectedIndex="">
-            <TabItem Visibility="Collapsed" Header="Tab 1">
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+            <TabItem Header="Tab 1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="34*"/>
@@ -87,6 +99,10 @@
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
+            <TabItem Header="Tab3"></TabItem>
+            <TabItem Header="Tab4"></TabItem>
+            <TabItem Header="Tab5"></TabItem>
+            <TabItem Header="Tab6"></TabItem>
         </TabControl>
     </DockPanel>
 </Window>
