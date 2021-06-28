@@ -74,7 +74,7 @@
                     <GroupBox Grid.Column="1" 
                               Header="{Binding SelectedGroup.Name, FallbackValue='Students',TargetNullValue='Group not selected'}">
                         <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
-                                  IsReadOnly="True" HorizontalGridLinesBrush="Transparent"
+                                  CanUserAddRows="False" HorizontalGridLinesBrush="Transparent"
                                   VerticalGridLinesBrush="AliceBlue" AlternatingRowBackground="Aquamarine">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
@@ -83,11 +83,22 @@
                                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
                                 <!--<DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/>-->
                                 <DataGridTemplateColumn Header="Birth Day">
-                                    <DataGridTemplateColumn.CellTemplate>
+                                    <!--<DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="dean:Student">
                                             <DatePicker SelectedDate="{Binding BirthDay}"/>
                                         </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>-->
+
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="dean:Student">
+                                            <TextBlock Text="{Binding BirthDay, StringFormat='dd.MM.yyyy'}"/>
+                                        </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate DataType="dean:Student">
+                                            <DatePicker SelectedDate="{Binding BirthDay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Group" Binding="{Binding DataContext.SelectedGroup.Name,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
