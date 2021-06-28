@@ -18,6 +18,22 @@ namespace MVVM_Learning.ViewModels
     /*-------------------------------------------------------------------------------------------*/
 
         public ObservableCollection<Group> Groups { get; }
+
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        private Group _SelectedGroup;
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        public Group SelectedGroup 
+        {
+            get => _SelectedGroup; 
+            set => Set(ref _SelectedGroup, value); 
+        }
+
         #region TestDataPoint : IEnumerable<DataPoint>  - Test data for visualization
 
         /// <summary>
@@ -113,7 +129,7 @@ namespace MVVM_Learning.ViewModels
             for (var x =0d; x <= 360; x+=0.1)
             {
                 const double to_rad = Math.PI / 180;
-                var y = Math.Sin(2 * Math.PI * x * to_rad);
+                var y = Math.Sin(x * to_rad);
 
                 data_points.Add(new DataPoint { XValue = x, YValue = y });
 
@@ -126,7 +142,7 @@ namespace MVVM_Learning.ViewModels
             {
                 Name = $"Name {student_index}",
                 Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
                 BirthDay = DateTime.Now,
                 Rating = 0
             });
@@ -134,9 +150,8 @@ namespace MVVM_Learning.ViewModels
             var groups = Enumerable.Range(1, 20).Select(i => new Group
             {
                 Name = $"Group {i}",
-                Students = new ObservableCollection<Student>()
-            }
-                );
+                Students = new ObservableCollection<Student>(students)
+            });
 
             Groups = new ObservableCollection<Group>(groups);
         }

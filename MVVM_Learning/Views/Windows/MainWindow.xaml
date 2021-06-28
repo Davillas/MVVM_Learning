@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cmd="clr-namespace:MVVM_Learning.Infrastructure.Commands"
         xmlns:vm="clr-namespace:MVVM_Learning.ViewModels"
+        xmlns:dean="clr-namespace:MVVM_Learning.Models.DeanOffice"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:MVVM_Learning"
         xmlns:oxy="http://oxyplot.org/wpf"
@@ -64,12 +65,38 @@
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Groups">
-                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    <GroupBox Grid.Column="0" Header="Groups">
+                        <ListBox ItemsSource="{Binding Groups}"
+                                 DisplayMemberPath="Name"
+                                 SelectedIndex="2"
+                                 SelectedItem="{Binding SelectedGroup}"/>
                     </GroupBox>
-                    <GroupBox Header="Groups">
-                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    <GroupBox Grid.Column="1" 
+                              Header="{Binding SelectedGroup.Name, FallbackValue='Students',TargetNullValue='Group not selected'}">
+                        <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" HorizontalGridLinesBrush="Transparent"
+                                  VerticalGridLinesBrush="AliceBlue" AlternatingRowBackground="Aquamarine">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Middle Name" Binding="{Binding Patronymic}"/>
+                                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
+                                <!--<DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/>-->
+                                <DataGridTemplateColumn Header="Birth Day">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="dean:Student">
+                                            <DatePicker SelectedDate="{Binding BirthDay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Group" Binding="{Binding DataContext.SelectedGroup.Name,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </GroupBox>
+                        
+
                 </Grid>
             </TabItem>
             <TabItem Header="Graph">

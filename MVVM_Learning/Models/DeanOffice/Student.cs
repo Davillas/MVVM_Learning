@@ -16,6 +16,8 @@ namespace MVVM_Learning.Models.DeanOffice
 
         public double Rating { get; set; }
 
+        public string Description { get; set; }
+
     }
 
     internal class Group
@@ -23,5 +25,7 @@ namespace MVVM_Learning.Models.DeanOffice
         public string Name { get; set; }
 
         public ICollection<Student> Students { get; set; }
+
+        public string Description { get; set; }
     }
 }
