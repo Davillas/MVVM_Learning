@@ -19,7 +19,25 @@ namespace MVVM_Learning.ViewModels
 
         public ObservableCollection<Group> Groups { get; }
 
+        public object[] CompositeCollection { get;  }
 
+        #region SelectedCompositeValue : object  - Test composite data for object selection
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        private Group _SelectedCompositeValue;
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        public Group SelectedCompositeValue
+        {
+            get => _SelectedCompositeValue;
+            set => Set(ref _SelectedCompositeValue, value);
+        }
+        #endregion
+
+        #region SelectedGroup : Group
         /// <summary>
         /// Test data for visualization
         /// </summary>
@@ -33,6 +51,7 @@ namespace MVVM_Learning.ViewModels
             get => _SelectedGroup; 
             set => Set(ref _SelectedGroup, value); 
         }
+        #endregion
 
         #region TestDataPoint : IEnumerable<DataPoint>  - Test data for visualization
 
@@ -154,6 +173,16 @@ namespace MVVM_Learning.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
+
+            var data_list = new List<object>();
+
+            data_list.Add("Hey Hey");
+            data_list.Add(43);
+            var group = Groups[1];
+            data_list.Add(group);
+            data_list.Add(group.Students[1]);
+
+            CompositeCollection = data_list.ToArray();
         }
 
     }
