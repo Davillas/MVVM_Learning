@@ -1,4 +1,5 @@
 ﻿using MVVM_Learning.Infrastructure.Commands;
+using MVVM_Learning.Models;
 using MVVM_Learning.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,20 @@ namespace MVVM_Learning.ViewModels
 {
     internal class MainWindowViewModel : BaseViewModel
     {
+        #region TestDataPoint : IEnumerable<DataPoint>  - Test data for visualization
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        private IEnumerable<DataPoint> _TestDataPoints;
+
+        /// <summary>
+        /// Test data for visualization
+        /// </summary>
+        public IEnumerable<DataPoint> TestDataPoints { get => _TestDataPoints; set => Set(ref _TestDataPoints, value); }
+
+        #endregion
+
         #region MainWindow Title
 
         private string _Title = "Test Title";
@@ -57,6 +72,18 @@ namespace MVVM_Learning.ViewModels
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             #endregion
+
+            var data_points = new List<DataPoint>((int)(360 / 0.1));
+            for (var x =0d; x <= 360; x+=0.1)
+            {
+                const double to_rad = Math.PI / 180;
+                var y = Math.Sin(2 * Math.PI * x * to_rad);
+
+                data_points.Add(new DataPoint { XValue = x, YValue = y });
+
+            }
+
+            TestDataPoints = data_points;
         }
 
     }
