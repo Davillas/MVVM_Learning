@@ -1,8 +1,11 @@
 ﻿using MVVM_Learning.Infrastructure.Commands;
 using MVVM_Learning.Models;
+using MVVM_Learning.Models.DeanOffice;
 using MVVM_Learning.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
@@ -11,6 +14,10 @@ namespace MVVM_Learning.ViewModels
 {
     internal class MainWindowViewModel : BaseViewModel
     {
+
+    /*-------------------------------------------------------------------------------------------*/
+
+        public ObservableCollection<Group> Groups { get; }
         #region TestDataPoint : IEnumerable<DataPoint>  - Test data for visualization
 
         /// <summary>
@@ -65,6 +72,8 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        /*-------------------------------------------------------------------------------------------*/
+
         #region Commands
 
         #region CloseApplicationCommand
@@ -90,6 +99,7 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        /*-------------------------------------------------------------------------------------------*/
         public MainWindowViewModel()
         {
             #region Commands
@@ -110,6 +120,25 @@ namespace MVVM_Learning.ViewModels
             }
 
             TestDataPoints = data_points;
+
+            var student_index = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student 
+            {
+                Name = $"Name {student_index}",
+                Surname = $"Surname {student_index}",
+                Patronymic = $"Patronymic {student_index}",
+                BirthDay = DateTime.Now,
+                Rating = 0
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Group {i}",
+                Students = new ObservableCollection<Student>()
+            }
+                );
+
+            Groups = new ObservableCollection<Group>(groups);
         }
 
     }

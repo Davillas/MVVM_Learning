@@ -58,33 +58,18 @@
         </StatusBar>
 
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
-            <TabItem Header="Tab 1">
+            <TabItem Header="Students">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="34*"/>
-                        <RowDefinition Height="63*"/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="250"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Rectangle Grid.Row="0" Grid.Column="0" Margin="5,7"
-                               Fill="Blue" Stroke="Red" StrokeThickness="3"
-                               RadiusX="5" RadiusY="7"/>
-
-                    <Ellipse Grid.Row="1" Grid.Column="0" Margin="5,7"
-                             Stroke="Blue" Fill="Red" StrokeThickness="3"
-                             >
-                        <Ellipse.InputBindings>
-                            <MouseBinding Command="{Binding CloseApplicationCommand}"
-                                          MouseAction="LeftDoubleClick"></MouseBinding>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
-
-                    <GridSplitter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                                  HorizontalAlignment="Right" Width="4"/>
-
-
+                    <GroupBox Header="Groups">
+                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    </GroupBox>
+                    <GroupBox Header="Groups">
+                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Graph">
