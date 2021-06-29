@@ -69,8 +69,15 @@
                     <GroupBox Grid.Column="0" Header="Groups">
                         <DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="3">
-                                <Button Content="Add" Margin="0,0, 3,0" Command="{Binding CreateGroupCommand}"/>
-                                <Button Content="Delete" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                                <UniformGrid.Resources>
+                                    <Style x:Key="ButtonStyle" TargetType="Button">
+                                        <Setter Property="Margin" Value="3,0"/>
+                                        <Setter Property="Padding" Value="3,5"/>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <Button Content="Add" Style="{StaticResource ButtonStyle}" Command="{Binding CreateGroupCommand}"/>
+                                <Button Content="Delete" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                             </UniformGrid>
                               
 
