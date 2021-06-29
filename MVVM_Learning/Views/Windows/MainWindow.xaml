@@ -17,6 +17,7 @@
     </Window.InputBindings>
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+
     </Window.Resources>    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -70,14 +71,14 @@
                         <DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="3">
                                 <UniformGrid.Resources>
-                                    <Style x:Key="ButtonStyle" TargetType="Button">
+                                    <Style TargetType="Button">
                                         <Setter Property="Margin" Value="3,0"/>
                                         <Setter Property="Padding" Value="3,5"/>
                                         <Setter Property="Background" Value="White"/>
                                     </Style>
                                 </UniformGrid.Resources>
-                                <Button Content="Add" Style="{StaticResource ButtonStyle}" Command="{Binding CreateGroupCommand}"/>
-                                <Button Content="Delete" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                                <Button Content="Add" Style="{StaticResource ConfirmButton}"  Command="{Binding CreateGroupCommand}"/>
+                                <Button Content="Delete" Style="{StaticResource DangerButton}"  Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                             </UniformGrid>
                               
 
@@ -204,7 +205,9 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tab4"></TabItem>
+            <TabItem Header="Tab4">
+                <Button Style="{StaticResource DangerButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Bbb" Margin="14,5"/>
+            </TabItem>
             <TabItem Header="Tab5"></TabItem>
             <TabItem Header="Tab6"></TabItem>
         </TabControl>
