@@ -4,22 +4,11 @@
              xmlns:local="clr-namespace:MVVM_Learning"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 
-
-        <Style x:Key="BtnBase" TargetType="ButtonBase">
-            <Setter Property="Background" Value="White"/>
-        </Style>
-        <Style TargetType="Button" BasedOn="{StaticResource BtnBase}"/>
-        <Style TargetType="ToggleButton" BasedOn="{StaticResource BtnBase}"/>
-
-
-        <Style x:Key="ConfirmButton" TargetType="Button">
-            <Setter Property="Background" Value="Blue"/>
-        </Style>
-        <Style x:Key="DangerButton" TargetType="Button">
-
-            <Setter Property="Background" Value="Green"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
     </Application.Resources>
 </Application>
