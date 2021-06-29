@@ -150,23 +150,11 @@
                             <TextBlock Text="Elements"/>
                         </GroupBox.Header>
                         <GroupBox.Resources>
-                            <DataTemplate DataType="{x:Type dean:Group}">
-                                <TextBlock Text="{Binding Name , StringFormat=Group {0}}"/>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type dean:Student}">
-                                <TextBlock Text="{Binding Name, StringFormat=Student {0}}"/>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:String}">
-                                <TextBlock>
-                                    <Run Foreground="Red" FontWeight="Bold">String:</Run>
-                                    <TextBlock Text="{Binding}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:Int32}">
-                                <TextBlock>
-                                    Integer: <TextBlock Text="{Binding}"/>
-                                </TextBlock>
-                            </DataTemplate>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItems.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
                         </GroupBox.Resources>
                         <ListBox ItemsSource="{Binding CompositeCollection}"
                                  SelectedItem="{Binding SelectedCompositeValue}"/>
@@ -174,32 +162,11 @@
                     </GroupBox>
                     <GroupBox Header="Selected Item" Grid.Column="1">
                         <GroupBox.Resources>
-                            <DataTemplate DataType="{x:Type dean:Group}">
-                                <TextBlock Text="{Binding Name , StringFormat=Group {0}}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="25"/>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type dean:Student}">
-                                <TextBlock Text="{Binding Name, StringFormat=Student {0}}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="25"/>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:String}">
-                                <TextBlock>
-                                    <Run Foreground="Red" FontWeight="Bold">String:</Run>
-                                    <TextBlock Text="{Binding}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type sys:Int32}">
-                                <TextBlock>
-                                    Integer: <TextBlock Text="{Binding}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="25"/>
-                                </TextBlock>
-                            </DataTemplate>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItemsControl.xaml"/>
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
                         </GroupBox.Resources>
                         <ContentControl Content="{Binding SelectedCompositeValue}"/>
                     </GroupBox>
