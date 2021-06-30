@@ -69,15 +69,23 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Grid.Column="0" Header="Groups">
                         <DockPanel>
+                            <DockPanel.Resources>
+                                <CollectionViewSource x:Key="GroupsCollection"
+                                                      x:Name="GroupsCollection"
+                                                      Source="{Binding Groups}"
+                                                      Filter="GroupsCollectionFilter"/>
+                            </DockPanel.Resources>
+                            <DockPanel DockPanel.Dock="Top">
+                                <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"></fa:ImageAwesome>
+                                <TextBox Name="GroupFilterText" TextChanged="OnGroupsFilter"/>
+                            </DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="3">
                                 <Button Content="Add" Style="{StaticResource ConfirmButtonStyle}"  Command="{Binding CreateGroupCommand}">
                                 </Button>
-                                
+
                                 <Button Content="Delete" Style="{StaticResource RemoveButtonStyle}"  Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                             </UniformGrid>
-                              
-
-                            <ListBox ItemsSource="{Binding Groups}"
+                            <ListBox ItemsSource="{Binding Source = {StaticResource GroupsCollection}}"
                                  SelectedIndex="0"
                                  SelectedItem="{Binding SelectedGroup}">
                                 <ListBox.ItemTemplate>
@@ -98,38 +106,47 @@
                     </GroupBox>
                     <GroupBox Grid.Column="1" 
                               Header="{Binding SelectedGroup.Name, FallbackValue='Students',TargetNullValue='Group not selected'}">
-                        <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" Margin="0,3">
+                                <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="6,0"></fa:ImageAwesome>
+                                <TextBlock Height="15" Margin="6,0"/>
+                            </DockPanel>
+                            <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
                                   CanUserAddRows="True" HorizontalGridLinesBrush="Transparent"
                                   VerticalGridLinesBrush="AliceBlue" AlternatingRowBackground="Aquamarine">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Middle Name" Binding="{Binding Patronymic}"/>
-                                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
-                                <!--<DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/>-->
-                                <DataGridTemplateColumn Header="Birth Day">
-                                    <!--<DataGridTemplateColumn.CellTemplate>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Middle Name" Binding="{Binding Patronymic}"/>
+                                    <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
+                                    <!--<DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}"/>-->
+                                    <DataGridTemplateColumn Header="Birth Day">
+                                        <!--<DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="dean:Student">
                                             <DatePicker SelectedDate="{Binding BirthDay}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>-->
 
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate DataType="dean:Student">
-                                            <TextBlock Text="{Binding BirthDay, StringFormat='dd.MM.yyyy'}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                    <DataGridTemplateColumn.CellEditingTemplate>
-                                        <DataTemplate DataType="dean:Student">
-                                            <DatePicker SelectedDate="{Binding BirthDay}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellEditingTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Group" Binding="{Binding DataContext.SelectedGroup.Name,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate DataType="dean:Student">
+                                                <TextBlock Text="{Binding BirthDay, StringFormat='dd.MM.yyyy'}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate DataType="dean:Student">
+                                                <DatePicker SelectedDate="{Binding BirthDay}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Group" Binding="{Binding DataContext.SelectedGroup.Name,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
 
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <DockPanel DockPanel.Dock="Top">
+
+                            </DockPanel>
+                        </DockPanel>
                     </GroupBox>
                         
 
@@ -146,39 +163,6 @@
                                     DataFieldX="XValue"
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
-            </TabItem>
-            <TabItem Header="Composite Data" Height="20" VerticalAlignment="Top">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox>
-                        <GroupBox.Header>
-                            <TextBlock Text="Elements"/>
-                        </GroupBox.Header>
-                        <GroupBox.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItems.xaml"/>
-                                </ResourceDictionary.MergedDictionaries>
-                            </ResourceDictionary>
-                        </GroupBox.Resources>
-                        <ListBox ItemsSource="{Binding CompositeCollection}"
-                                 SelectedItem="{Binding SelectedCompositeValue}"/>
-
-                    </GroupBox>
-                    <GroupBox Header="Selected Item" Grid.Column="1">
-                        <GroupBox.Resources>
-                            <ResourceDictionary>
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="../../Resources/DataTemplates/CompositeItemsControl.xaml"/>
-                                </ResourceDictionary.MergedDictionaries>
-                            </ResourceDictionary>
-                        </GroupBox.Resources>
-                        <ContentControl Content="{Binding SelectedCompositeValue}"/>
-                    </GroupBox>
-                </Grid>
             </TabItem>
             <TabItem Header="Tab4">
                 <Button Style="{StaticResource CustomButtonStyle}"

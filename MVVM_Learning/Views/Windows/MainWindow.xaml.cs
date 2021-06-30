@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVM_Learning.Models.DeanOffice;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,28 @@ namespace MVVM_Learning
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void GroupsCollectionFilter(object sender, FilterEventArgs E)
+        {
+            if (!(E.Item is Group group)) return;
+            if(group.Name is null) return;
+
+            var filterText = GroupFilterText.Text;
+            if (filterText.Length == 0) return;
+                
+
+            if (group.Name.Contains(filterText, StringComparison.OrdinalIgnoreCase)) return;
+            if (group.Description != null && group.Description.Contains(filterText,StringComparison.OrdinalIgnoreCase)) return;
+
+            E.Accepted = false;
+        }
+
+        private void OnGroupsFilter(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (TextBox) sender;
+            var collection = (CollectionViewSource)textBox.FindResource("GroupsCollection");
+            collection.View.Refresh();
         }
     }
 }
