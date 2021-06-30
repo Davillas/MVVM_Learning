@@ -168,10 +168,50 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Tab4">
-                <Button Style="{StaticResource ConfirmButtonStyle}"
+                <Button Style="{StaticResource CustomButtonStyle}"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
-                        Content="Bbb" Margin="14,5"/>
+                        Content="Bbb" Margin="14,5" RenderTransformOrigin="0.5,0.5" >
+                    <Button.Background>
+                        <SolidColorBrush Color="White" x:Name="ButtonBrush"/>
+                    </Button.Background>
+                    <Button.RenderTransform>
+                        <RotateTransform Angle="0" x:Name="ButtonRotation"/>
+                    </Button.RenderTransform>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="ButtonRotation"
+                                                     Storyboard.TargetProperty="Angle"
+                                                     From="0" To="360"
+                                                     Duration="0:0:1"
+                                                     AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ButtonBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.1"
+                                                    To="Red"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ButtonBrush"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:3"
+                                                    To="White"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
             </TabItem>
             <TabItem Header="Tab5"></TabItem>
             <TabItem Header="Tab6"></TabItem>

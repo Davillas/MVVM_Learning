@@ -5,7 +5,9 @@ using MVVM_Learning.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
@@ -169,6 +171,9 @@ namespace MVVM_Learning.ViewModels
         /*-------------------------------------------------------------------------------------------*/
         public MainWindowViewModel()
         {
+            #region MyRegion
+            
+            #endregion
             #region Commands
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
