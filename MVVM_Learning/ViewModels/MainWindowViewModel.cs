@@ -1,16 +1,19 @@
 ﻿using MVVM_Learning.Infrastructure.Commands;
-using MVVM_Learning.Models;
 using MVVM_Learning.Models.DeanOffice;
 using MVVM_Learning.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
+using OxyPlot;
+using DataPoint = MVVM_Learning.Models.DataPoint;
 
 namespace MVVM_Learning.ViewModels
 {
@@ -82,9 +85,70 @@ namespace MVVM_Learning.ViewModels
         /// </summary>
         public Group SelectedGroup 
         {
-            get => _SelectedGroup; 
-            set => Set(ref _SelectedGroup, value); 
+            get => _SelectedGroup;
+            set
+            {
+                if(!Set(ref _SelectedGroup, value)) return;
+
+                _SelectedGroupStudents.Source = value?.Students;
+                OnPropertyChanged(nameof(SelectedGroupStudents));
+            }
         }
+        #endregion
+
+        #region StudentFilterText : string - Text of Student Filter
+
+        /// <summary>DESCRIPTION</summary>
+        private string _StudentFilterText;
+
+        /// <summary>DESCRIPTION</summary>
+        public string StudentFilterText
+        {
+            get => _StudentFilterText;
+            set
+            {
+                if(!Set(ref _StudentFilterText, value)) return;
+                _SelectedGroupStudents.View.Refresh();
+
+            }
+        }
+
+        #endregion
+
+        #region StudentFilter
+
+        
+        private readonly CollectionViewSource _SelectedGroupStudents = new CollectionViewSource();
+
+        private void OnStudentFilter(object sender, FilterEventArgs E)
+        {
+            if (!(E.Item is Student student))
+            {
+                E.Accepted = false;
+                return;
+
+            }
+
+            var filterText = _StudentFilterText;
+            if(string.IsNullOrWhiteSpace(filterText))
+                return;
+
+            if (student.Name is null || student.Surname is null || student.Patronymic is null)
+            {
+
+                E.Accepted = false;
+                return;
+            }
+
+
+            if (student.Name.Contains(filterText, StringComparison.OrdinalIgnoreCase)) return;
+            if (student.Surname.Contains(filterText, StringComparison.OrdinalIgnoreCase)) return;
+            if (student.Patronymic.Contains(filterText, StringComparison.OrdinalIgnoreCase)) return;
+
+            E.Accepted = false;
+        }
+        public ICollectionView SelectedGroupStudents => _SelectedGroupStudents?.View;
+
         #endregion
 
         #region TestDataPoint : IEnumerable<DataPoint>  - Test data for visualization
@@ -224,7 +288,12 @@ namespace MVVM_Learning.ViewModels
             data_list.Add(group.Students[1]);
 
             CompositeCollection = data_list.ToArray();
+
+            _SelectedGroupStudents.Filter += OnStudentFilter;
+
+            //_SelectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }
 
+        
     }
 }

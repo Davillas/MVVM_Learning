@@ -118,11 +118,15 @@
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="6,0"></fa:ImageAwesome>
-                                <TextBlock Height="15" Margin="6,0"/>
+                                <TextBox Text="{Binding StudentFilterText, UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
-                            <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
+                            <DataGrid ItemsSource="{Binding SelectedGroupStudents}" AutoGenerateColumns="False"
                                   CanUserAddRows="True" HorizontalGridLinesBrush="Transparent"
-                                  VerticalGridLinesBrush="AliceBlue" AlternatingRowBackground="Aquamarine">
+                                  VerticalGridLinesBrush="AliceBlue" AlternatingRowBackground="Aquamarine"
+                                  EnableRowVirtualization="True">
+                                <!--<DataGrid.GroupStyle>
+                                    <GroupStyle/>
+                                </DataGrid.GroupStyle>-->
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
                                     <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -219,7 +223,7 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="Tab5"></TabItem>
+            <TabItem Header="V"></TabItem>
             <TabItem Header="Tab6"></TabItem>
         </TabControl>
     </DockPanel>
