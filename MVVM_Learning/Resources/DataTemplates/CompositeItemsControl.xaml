@@ -19,7 +19,7 @@
         <TextBlock>
                                     <Run Foreground="Red" FontWeight="Bold">String:</Run>
                                     <TextBlock Text="{Binding}"/>
-                                </TextBlock>
+        </TextBlock>
     </DataTemplate>
     <DataTemplate DataType="{x:Type sys:Int32}">
         <TextBlock>
@@ -27,6 +27,6 @@
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="25"/>
-                                </TextBlock>
+        </TextBlock>
     </DataTemplate>
 </ResourceDictionary>
