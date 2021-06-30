@@ -70,18 +70,10 @@
                     <GroupBox Grid.Column="0" Header="Groups">
                         <DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="3">
-                                <Button  Style="{StaticResource ConfirmButton}"  Command="{Binding CreateGroupCommand}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <fa:ImageAwesome Height="12" Icon="Solid_Check" Foreground="LightGreen">
-                                            <fa:ImageAwesome.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </fa:ImageAwesome.Effect>
-                                        </fa:ImageAwesome>
-                                        <TextBlock Text="Add" Margin="5,0,0,0"/>
-                                    </StackPanel>
+                                <Button Content="Add" Style="{StaticResource ConfirmButtonStyle}"  Command="{Binding CreateGroupCommand}">
                                 </Button>
                                 
-                                <Button Content="Delete" Style="{StaticResource DangerButton}"  Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                                <Button Content="Delete" Style="{StaticResource RemoveButtonStyle}"  Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                             </UniformGrid>
                               
 
@@ -176,7 +168,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Tab4">
-                <Button Style="{StaticResource CustomButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Bbb" Margin="14,5"/>
+                <Button Style="{StaticResource ConfirmButtonStyle}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Content="Bbb" Margin="14,5"/>
             </TabItem>
             <TabItem Header="Tab5"></TabItem>
             <TabItem Header="Tab6"></TabItem>
