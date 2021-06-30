@@ -7,7 +7,7 @@
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 2212132321
         }
     }
 }
