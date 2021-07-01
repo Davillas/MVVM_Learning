@@ -205,6 +205,21 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region SelectedDirectory : DirectoryViewModel - Selected Directory
+
+        /// <summary>DESCRIPTION</summary>
+        private DirectoryViewModel _SelectedDirectory;
+
+        /// <summary>DESCRIPTION</summary>
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _SelectedDirectory;
+            set => Set(ref _SelectedDirectory, value);
+        }
+
+        #endregion
         /*-------------------------------------------------------------------------------------------*/
 
         #region Commands
