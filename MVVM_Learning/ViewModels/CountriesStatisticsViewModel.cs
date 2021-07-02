@@ -17,6 +17,19 @@ namespace MVVM_Learning.ViewModels
 
         private MainWindowViewModel MainModel { get; }
 
+        #region SelectedCountry : CountryInfo - Selected Country
+
+        /// <summary>DESCRIPTION</summary>
+        private CountryInfo _SelectedCountry;
+
+        /// <summary>DESCRIPTION</summary>
+        public CountryInfo SelectedCountry
+        {
+            get => _SelectedCountry;
+            set => Set(ref _SelectedCountry, value);
+        }
+
+        #endregion
 
         #region Countries : IEnumerable<CountryInfo> - Countries Statistics 
 
