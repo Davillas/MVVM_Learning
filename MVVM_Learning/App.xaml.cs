@@ -13,9 +13,7 @@ namespace MVVM_Learning
         {
             base.OnStartup(e);
 
-            var serviceTest = new DataService();
-
-            var countries = serviceTest.GetData().ToArray();
+            
         }
     }
 }

@@ -61,7 +61,7 @@
         </StatusBar>
 
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
-            <TabItem Header="Students">
+            <TabItem Header="Students" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250"/>
@@ -177,7 +177,7 @@
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
-            <TabItem Header="Tab4">
+            <TabItem Header="Tab4" Visibility="Collapsed">
                 <Button Style="{StaticResource CustomButtonStyle}"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
@@ -223,7 +223,7 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="File System" Margin="-4,-2,0,0">
+            <TabItem Header="File System" Margin="-4,-2,0,0" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="83"/>
@@ -265,7 +265,7 @@
                     </GroupBox>-->
                 </Grid>
             </TabItem>
-            <TabItem Header="Tab6"></TabItem>
+            <TabItem Header="Tab6" Visibility="Collapsed"></TabItem>
         </TabControl>
     </DockPanel>
 </Window>

@@ -34,7 +34,9 @@ namespace MVVM_Learning.Services
                 if (string.IsNullOrWhiteSpace(line)) continue;
                 yield return line
                     .Replace("Korea,", "Korea -")
-                    .Replace("Bonaire,", "Bonaire -").Replace("Repatriated Travellers", "Repatriated");
+                    .Replace("Bonaire,", "Bonaire -")
+                    .Replace("Repatriated Travellers", "Repatriated")
+                    .Replace("Saint Helena," , "Saint Helena -");
             }
         }
 
@@ -52,6 +54,10 @@ namespace MVVM_Learning.Services
 
             foreach (var row in lines)
             {
+                if (row[0].Trim() == "Repatriated" || row[0].Trim() == "Unknown") continue;
+
+                    
+
                 var province = row[0].Trim();
                 var countryName = row[1].Trim(' ', '"');
                 var latitude = double.Parse(row[2]);
