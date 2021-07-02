@@ -9,6 +9,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:local="clr-namespace:MVVM_Learning"
+        xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="{Binding Path=Title}" 
         Width="800" Height="450" >
@@ -60,7 +61,11 @@
             <StatusBarItem Content="{Binding SelectedPageIndex}" IsEnabled="False"/>
         </StatusBar>
 
-        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}" >
+            <TabItem Header="Covid Stats">
+                <view:CountriesStatisticsView/>
+
+            </TabItem>
             <TabItem Header="Students" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -222,48 +227,6 @@
                         </EventTrigger>
                     </Button.Triggers>
                 </Button>
-            </TabItem>
-            <TabItem Header="File System" Margin="-4,-2,0,0" Visibility="Collapsed">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="83"/>
-                        <ColumnDefinition Width="167"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Directories" Grid.ColumnSpan="2">
-                        <!--<ListBox ItemsSource="{Binding DiskRootDir.DirectoryItems}" SelectedItem="{Binding SelectedDirectory}" SelectedIndex="0">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="vm:DirectoryViewModel">
-                                    <TextBlock Text="{Binding Name}" 
-                                               ToolTip="{Binding CreationTime}"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>-->
-                        <GroupBox.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
-                                                      ItemsSource="{Binding DirectoryItems}">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:ImageAwesome Height="12" Icon="Solid_FolderPlus" Foreground="BurlyWood" Margin="0,0,3,0"></fa:ImageAwesome>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </HierarchicalDataTemplate>
-                            <DataTemplate DataType="{x:Type vm:FileViewModel}">
-                                <StackPanel Orientation="Horizontal" ToolTip="{Binding CreationTime}">
-                                    <fa:ImageAwesome Height="12" Icon="Solid_File" Foreground="LightBlue" Margin="0,0,3,0"></fa:ImageAwesome>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GroupBox.Resources>
-                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
-                            
-                        </TreeView>
-                    </GroupBox>
-                    <!--<GroupBox Grid.Column="2" Header="Files">
-                        <ListBox SelectedItem="{Binding SelectedDirectory.Files, Mode=OneWay}">
-                            
-                        </ListBox>
-                    </GroupBox>-->
-                </Grid>
             </TabItem>
             <TabItem Header="Tab6" Visibility="Collapsed"></TabItem>
         </TabControl>

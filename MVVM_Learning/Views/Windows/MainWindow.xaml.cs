@@ -47,5 +47,7 @@ namespace MVVM_Learning
             var collection = (CollectionViewSource)textBox.FindResource("GroupsCollection");
             collection.View.Refresh();
         }
+
+        
     }
 }
