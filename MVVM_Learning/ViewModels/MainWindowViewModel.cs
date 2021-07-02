@@ -23,9 +23,9 @@ namespace MVVM_Learning.ViewModels
 
         /*-------------------------------------------------------------------------------------------*/
 
-        private readonly CountriesStatisticsViewModel _CountriesStatistics;
+        public CountriesStatisticsViewModel CountriesStatistics {get;}
 
-        /*-------------------------------------------------------------------------------------------*/
+    /*-------------------------------------------------------------------------------------------*/
 
         
 
@@ -178,7 +178,9 @@ namespace MVVM_Learning.ViewModels
 
             #region CountriesStatistics
 
-            _CountriesStatistics = new CountriesStatisticsViewModel(this);
+            CountriesStatistics = new CountriesStatisticsViewModel(this);
+
+            //CountriesStatistics = new CountriesStatisticsViewModel(this);
             #endregion
             #region Commands
 
