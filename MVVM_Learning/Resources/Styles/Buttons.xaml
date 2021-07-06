@@ -2,19 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.fontawesome.com/icons/">
     <Style x:Key="BtnBase" TargetType="ButtonBase">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
     </Style>
     <Style TargetType="Button" BasedOn="{StaticResource BtnBase}"/>
     <Style TargetType="ToggleButton" BasedOn="{StaticResource BtnBase}"/>
 
 
     <Style x:Key="ConfirmButton" TargetType="Button">
-        <Setter Property="Background" Value="WhiteSmoke"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
     </Style>
     <Style x:Key="DangerButton" TargetType="Button">
 
-        <Setter Property="Background" Value="Green"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource GreenBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
     </Style>
 
 
