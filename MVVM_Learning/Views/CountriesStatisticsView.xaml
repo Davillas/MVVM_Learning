@@ -10,6 +10,8 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              xmlns:conv="clr-namespace:MVVM_Learning.Infrastructure.Converters"
              xmlns:m="clr-namespace:MVVM_Learning.Models"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
              Background="White"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticsViewModel, d:IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -68,7 +70,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="1000"/>
-                <StackPanel Grid.Row="0">
+                <!--StackPanel Grid.Row="0">
                     <Slider Grid.Row="0" Name="ValueSlider1" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self} , Converter={conv:Linear 5}}"/>
                     <Slider Grid.Row="0" Name="ValueSlider2" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}, Converter={conv:CompositeConverter First={conv:Add 5}, Second={conv:Multiply 8}}}"/>
                     <Slider Grid.Row="0" Name="ValueSlider3" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}, Converter={conv:CompositeConverter {conv:Linear 5, 7}, Second={conv:CompositeConverter {conv:Multiply 6}, {conv:Add 7}}}}"/>
@@ -76,16 +78,36 @@
                 </StackPanel>
                 <Border Grid.Row="1" DataContext="{common:StringToIntArray '1;2;77;4;5'}">
                     <ListBox Grid.Row="1" ItemsSource="{Binding}">
-                        <!--<ListBox.ItemsSource>
+                        --><!--<ListBox.ItemsSource>
                         <MultiBinding Converter="{StaticResource ToArrayConverter}">
                             <Binding ElementName="ValueSlider1" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider2" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider3" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider4" Path="Value"></Binding>
                         </MultiBinding>
-                    </ListBox.ItemsSource>-->
+                    </ListBox.ItemsSource>--><!--
                     </ListBox>
-                </Border>
+                </Border>-->
+
+                <oxy:Plot Grid.Row="0">
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis Position="Left" Title="Quantity" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
+                        <oxy:DateTimeAxis Position="Bottom" Title="Date" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
+
+                    </oxy:Plot.Axes>
+                    <oxy:LineSeries StrokeThickness="2" Color="Red"
+                                    ItemsSource="{Binding SelectedCountry.Counts}"
+                                    DataFieldX="Date" DataFieldY="Count"/>
+                </oxy:Plot>
+                <map:Map Grid.Row="1"
+                         ZoomLevel="5" MaxZoomLevel="21"
+                         Center="{Binding SelectedCountry.Location, Converter={conv:PointToMapLocation}}">
+                    <map:MapScale Margin="4" Opacity="0.5" Background="Transparent" VerticalAlignment="Bottom"/>
+                    <map:MapGraticule Opacity="0.3" Background="Transparent"/>
+                    <map:Map.MapLayer>
+                        <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>
+                    </map:Map.MapLayer>
+                </map:Map>
             </Grid>
         </GroupBox>
     </Grid>
