@@ -58,16 +58,30 @@
                         </conv:CompositeConverter.Second>
                     </conv:CompositeConverter>
 
+                    <conv:ToArrayConverter x:Key="ToArrayConverter"/>
+
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="1000"/>
-                <Slider Grid.Row="0" Name="ValueSlider" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
-                <TextBox Grid.Row="0" Margin="0,30,0,0" 
-                         Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource TestConverter}, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalAlignment="Top" HorizontalAlignment="Left" Width="250"/>
+                <StackPanel Grid.Row="0">
+                    <Slider Grid.Row="0" Name="ValueSlider1" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider3" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider4" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                </StackPanel>
+                <ListBox Grid.Row="1">
+                    <ListBox.ItemsSource>
+                        <MultiBinding Converter="{StaticResource ToArrayConverter}">
+                            <Binding ElementName="ValueSlider1" Path="Value"></Binding>
+                            <Binding ElementName="ValueSlider2" Path="Value"></Binding>
+                            <Binding ElementName="ValueSlider3" Path="Value"></Binding>
+                            <Binding ElementName="ValueSlider4" Path="Value"></Binding>
+                        </MultiBinding>
+                    </ListBox.ItemsSource>
+                </ListBox>
             </Grid>
         </GroupBox>
     </Grid>
