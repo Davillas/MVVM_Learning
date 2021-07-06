@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="WhiteBrush" Color="White" p:Freeze="true"></SolidColorBrush>
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" p:Freeze="true"></SolidColorBrush>
     <SolidColorBrush x:Key="GreenBrush" Color="Green"></SolidColorBrush>
     
 </ResourceDictionary>

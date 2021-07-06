@@ -45,8 +45,19 @@
         <GroupBox Grid.Column="1" Header="Information">
             <Grid>
                 <Grid.Resources>
+                    <sys:Double x:Key="Value3">3</sys:Double>
                     <conv:Multiply K="2" x:Key="Multiplyx"/>
-                    <conv:Linear K="5" B="3" x:Key="Linear_K5_B3"/>
+                    <conv:Linear K="5" B="{StaticResource Value3}" x:Key="Linear_K5_B3"/>
+                    <conv:CompositeConverter x:Key="TestConverter">
+                        <conv:CompositeConverter.First>
+                            <conv:Linear K ="5"></conv:Linear>
+                        </conv:CompositeConverter.First>
+
+                        <conv:CompositeConverter.Second>
+                            <conv:Linear K="-3" B="10"></conv:Linear>
+                        </conv:CompositeConverter.Second>
+                    </conv:CompositeConverter>
+
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -55,7 +66,7 @@
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="1000"/>
                 <Slider Grid.Row="0" Name="ValueSlider" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
                 <TextBox Grid.Row="0" Margin="0,30,0,0" 
-                         Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource Multiplyx}, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource TestConverter}, UpdateSourceTrigger=PropertyChanged}"
                          VerticalAlignment="Top" HorizontalAlignment="Left" Width="250"/>
             </Grid>
         </GroupBox>
