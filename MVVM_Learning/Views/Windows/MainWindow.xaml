@@ -12,6 +12,7 @@
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="{Binding Path=Title}" 
+        DataContext="{vm:MainWindowViewModel}"
         Width="800" Height="450" >
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q" Command="{Binding CloseApplicationCommand}"/>
@@ -20,11 +21,9 @@
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
 
     </Window.Resources>
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    
 
-    <DockPanel>
+        <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <!--<MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}">/-->

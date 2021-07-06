@@ -12,11 +12,13 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using OxyPlot;
 using DataPoint = MVVM_Learning.Models.DataPoint;
 
 namespace MVVM_Learning.ViewModels
 {
+    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : BaseViewModel
     {
 
