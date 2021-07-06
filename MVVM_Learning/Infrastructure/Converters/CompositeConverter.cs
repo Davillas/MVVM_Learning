@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace MVVM_Learning.Infrastructure.Converters
 {
+    [MarkupExtensionReturnType(typeof(CompositeConverter))]
     internal class CompositeConverter : BaseConverter
     {
+        [ConstructorArgument("First")]
         public IValueConverter First { get; set; }
+        [ConstructorArgument("Second")]
         public IValueConverter Second { get; set; }
+
+        public CompositeConverter() { }
+        public CompositeConverter(IValueConverter First) => this.First = First;
+        public CompositeConverter(IValueConverter First, IValueConverter Second) : this(First) => this.Second = Second;
 
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -6,6 +6,7 @@
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:local="clr-namespace:MVVM_Learning.Views"
              xmlns:vm="clr-namespace:MVVM_Learning.ViewModels"
+             xmlns:common="clr-namespace:MVVM_Learning.Infrastructure.Common"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              xmlns:conv="clr-namespace:MVVM_Learning.Infrastructure.Converters"
              xmlns:m="clr-namespace:MVVM_Learning.Models"
@@ -59,6 +60,7 @@
                     </conv:CompositeConverter>
 
                     <conv:ToArrayConverter x:Key="ToArrayConverter"/>
+                    <conv:Add x:Key="AddConverter"></conv:Add>
 
                 </Grid.Resources>
                 <Grid.RowDefinitions>
@@ -67,21 +69,23 @@
                 </Grid.RowDefinitions>
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="1000"/>
                 <StackPanel Grid.Row="0">
-                    <Slider Grid.Row="0" Name="ValueSlider1" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
-                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
-                    <Slider Grid.Row="0" Name="ValueSlider3" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider1" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self} , Converter={conv:Linear 5}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}, Converter={conv:CompositeConverter First={conv:Add 5}, Second={conv:Multiply 8}}}"/>
+                    <Slider Grid.Row="0" Name="ValueSlider3" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}, Converter={conv:CompositeConverter {conv:Linear 5, 7}, Second={conv:CompositeConverter {conv:Multiply 6}, {conv:Add 7}}}}"/>
                     <Slider Grid.Row="0" Name="ValueSlider4" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
                 </StackPanel>
-                <ListBox Grid.Row="1">
-                    <ListBox.ItemsSource>
+                <Border Grid.Row="1" DataContext="{common:StringToIntArray '1;2;77;4;5'}">
+                    <ListBox Grid.Row="1" ItemsSource="{Binding}">
+                        <!--<ListBox.ItemsSource>
                         <MultiBinding Converter="{StaticResource ToArrayConverter}">
                             <Binding ElementName="ValueSlider1" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider2" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider3" Path="Value"></Binding>
                             <Binding ElementName="ValueSlider4" Path="Value"></Binding>
                         </MultiBinding>
-                    </ListBox.ItemsSource>
-                </ListBox>
+                    </ListBox.ItemsSource>-->
+                    </ListBox>
+                </Border>
             </Grid>
         </GroupBox>
     </Grid>
