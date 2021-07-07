@@ -12,89 +12,28 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using OxyPlot;
 using DataPoint = MVVM_Learning.Models.DataPoint;
 
 namespace MVVM_Learning.ViewModels
 {
+    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : BaseViewModel
     {
 
-        #region CreateGroupCommand
-        public ICommand CreateGroupCommand { get; }
 
-        private bool CanCreateGroupCommandExecute(object p) => true;
-
-        private void OnCreateGroupCommandExecuted(object p)
-        {
-            var group_max_index = Groups.Count + 1;
-
-            var new_group = new Group
-            {
-                Name = $"Group {group_max_index}",
-                Students = new ObservableCollection<Student>()
-            };
-
-            Groups.Add(new_group);
-        }
-        #endregion
-        #region DeleteGroupCommand
-        public ICommand DeleteGroupCommand { get; }
-
-        private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
-
-        private void OnDeleteGroupCommandExecuted(object p)
-        {
-            if (!(p is Group group)) return;
-
-            var group_index = Groups.IndexOf(group);
-            Groups.Remove(group);
-            if (group_index < Groups.Count) SelectedGroup = Groups[group_index];
-        }
-        #endregion
         /*-------------------------------------------------------------------------------------------*/
 
-        public ObservableCollection<Group> Groups { get; }
+        public CountriesStatisticsViewModel CountriesStatistics {get;}
 
-        public object[] CompositeCollection { get;  }
+    /*-------------------------------------------------------------------------------------------*/
 
-        #region SelectedCompositeValue : object  - Test composite data for object selection
-        /// <summary>
-        /// Test data for visualization
-        /// </summary>
-        private Group _SelectedCompositeValue;
+        
 
-        /// <summary>
-        /// Test data for visualization
-        /// </summary>
-        public Group SelectedCompositeValue
-        {
-            get => _SelectedCompositeValue;
-            set => Set(ref _SelectedCompositeValue, value);
-        }
-        #endregion
+        
 
-        #region SelectedGroup : Group
-        /// <summary>
-        /// Test data for visualization
-        /// </summary>
-        private Group _SelectedGroup;
-
-        /// <summary>
-        /// Test data for visualization
-        /// </summary>
-        public Group SelectedGroup 
-        {
-            get => _SelectedGroup;
-            set
-            {
-                if(!Set(ref _SelectedGroup, value)) return;
-
-                _SelectedGroupStudents.Source = value?.Students;
-                OnPropertyChanged(nameof(SelectedGroupStudents));
-            }
-        }
-        #endregion
+        
 
         #region StudentFilterText : string - Text of Student Filter
 
@@ -205,21 +144,8 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
-        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
-
-        #region SelectedDirectory : DirectoryViewModel - Selected Directory
-
-        /// <summary>DESCRIPTION</summary>
-        private DirectoryViewModel _SelectedDirectory;
-
-        /// <summary>DESCRIPTION</summary>
-        public DirectoryViewModel SelectedDirectory
-        {
-            get => _SelectedDirectory;
-            set => Set(ref _SelectedDirectory, value);
-        }
-
-        #endregion
+        
+      
         /*-------------------------------------------------------------------------------------------*/
 
         #region Commands
@@ -248,10 +174,16 @@ namespace MVVM_Learning.ViewModels
         #endregion
 
         /*-------------------------------------------------------------------------------------------*/
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticsViewModel Statistics)
         {
-            #region MyRegion
-            
+
+
+            #region CountriesStatistics
+
+            CountriesStatistics = Statistics;
+            CountriesStatistics.MainModel = this;
+
+            //CountriesStatistics = new CountriesStatisticsViewModel(this);
             #endregion
             #region Commands
 
@@ -259,9 +191,6 @@ namespace MVVM_Learning.ViewModels
 
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
 
-            CreateGroupCommand = new LambdaCommand(OnCreateGroupCommandExecuted, CanCreateGroupCommandExecute);
-
-            DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
             #endregion
 
             var data_points = new List<DataPoint>((int)(360 / 0.1));
@@ -275,36 +204,7 @@ namespace MVVM_Learning.ViewModels
             }
 
             TestDataPoints = data_points;
-
-            var student_index = 1;
-            var students = Enumerable.Range(1, 10).Select(i => new Student 
-            {
-                Name = $"Name {student_index}",
-                Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index++}",
-                BirthDay = DateTime.Now,
-                Rating = 0
-            });
-
-            var groups = Enumerable.Range(1, 20).Select(i => new Group
-            {
-                Name = $"Group {i}",
-                Students = new ObservableCollection<Student>(students)
-            });
-
-            Groups = new ObservableCollection<Group>(groups);
-
-            var data_list = new List<object>();
-
-            data_list.Add("Hey Hey");
-            data_list.Add(43);
-            var group = Groups[1];
-            data_list.Add(group);
-            data_list.Add(group.Students[1]);
-
-            CompositeCollection = data_list.ToArray();
-
-            _SelectedGroupStudents.Filter += OnStudentFilter;
+            
 
             //_SelectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }

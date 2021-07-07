@@ -10,7 +10,7 @@ namespace MVVM_Learning.Models
 
         public virtual Point Location { get; set; }
 
-        public IEnumerable<ConfirmedCount> Counts { get; set; }
+        public virtual IEnumerable<ConfirmedCount> Counts { get; set; }
     }
 
 }

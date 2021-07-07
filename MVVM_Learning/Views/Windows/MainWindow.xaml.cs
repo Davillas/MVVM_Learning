@@ -21,25 +21,13 @@ namespace MVVM_Learning
     /// </summary>
     public partial class MainWindow : Window
     {
+      
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void GroupsCollectionFilter(object sender, FilterEventArgs E)
-        {
-            if (!(E.Item is Group group)) return;
-            if(group.Name is null) return;
-
-            var filterText = GroupFilterText.Text;
-            if (filterText.Length == 0) return;
-                
-
-            if (group.Name.Contains(filterText, StringComparison.OrdinalIgnoreCase)) return;
-            if (group.Description != null && group.Description.Contains(filterText,StringComparison.OrdinalIgnoreCase)) return;
-
-            E.Accepted = false;
-        }
+        
 
         private void OnGroupsFilter(object sender, TextChangedEventArgs e)
         {
@@ -47,5 +35,7 @@ namespace MVVM_Learning
             var collection = (CollectionViewSource)textBox.FindResource("GroupsCollection");
             collection.View.Refresh();
         }
+
+        
     }
 }
