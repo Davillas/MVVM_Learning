@@ -7,13 +7,14 @@ using System.Windows.Input;
 using MVVM_Learning.Infrastructure.Commands;
 using MVVM_Learning.Models;
 using MVVM_Learning.Services;
+using MVVM_Learning.Services.Interfaces;
 using MVVM_Learning.ViewModels.Base;
 
 namespace MVVM_Learning.ViewModels
 {
     internal class CountriesStatisticsViewModel : BaseViewModel
     {
-        private readonly DataService _DataService;
+        private readonly IDataService _DataService;
 
         public MainWindowViewModel MainModel { get; internal set; }
 
@@ -80,7 +81,7 @@ namespace MVVM_Learning.ViewModels
                 }).ToArray();
         }
 */
-        public CountriesStatisticsViewModel( DataService dataService)
+        public CountriesStatisticsViewModel( IDataService dataService)
         {
             
 

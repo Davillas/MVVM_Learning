@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVVM_Learning.Models;
 using MVVM_Learning.Services;
+using MVVM_Learning.Services.Interfaces;
 using MVVM_Learning.ViewModels;
 
 namespace MVVM_Learning
@@ -43,7 +44,7 @@ namespace MVVM_Learning
 
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
+            services.AddTransient<IDataService, DataService>();
             
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<CountriesStatisticsViewModel>();
