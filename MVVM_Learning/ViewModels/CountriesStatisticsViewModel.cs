@@ -15,7 +15,7 @@ namespace MVVM_Learning.ViewModels
     {
         private readonly DataService _DataService;
 
-        private MainWindowViewModel MainModel { get; }
+        public MainWindowViewModel MainModel { get; internal set; }
 
         #region SelectedCountry : CountryInfo - Selected Country
 
@@ -58,7 +58,7 @@ namespace MVVM_Learning.ViewModels
         /// <summary>
         /// Debug Constructor for visual designer
         /// </summary>
-        public CountriesStatisticsViewModel() : this(null)
+       /* public CountriesStatisticsViewModel() : this(null)
         {
             if (!App.IsDesignMode)
                 throw new InvalidOperationException("Constructor Call not designed for using in regular mode");
@@ -79,12 +79,12 @@ namespace MVVM_Learning.ViewModels
                     }).ToArray()
                 }).ToArray();
         }
-
-        public CountriesStatisticsViewModel(MainWindowViewModel MainModel)
+*/
+        public CountriesStatisticsViewModel( DataService dataService)
         {
-            this.MainModel = MainModel;
+            
 
-            _DataService = new DataService();
+            _DataService = dataService;
 
             #region Commands
 

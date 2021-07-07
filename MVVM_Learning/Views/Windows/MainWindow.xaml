@@ -12,7 +12,7 @@
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="{Binding Path=Title}" 
-        DataContext="{vm:MainWindowViewModel}"
+        DataContext="{Binding MainWindowVModel, Source={StaticResource Locator}}"
         Width="800" Height="450" >
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q" Command="{Binding CloseApplicationCommand}"/>

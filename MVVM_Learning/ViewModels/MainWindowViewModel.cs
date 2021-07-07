@@ -174,13 +174,14 @@ namespace MVVM_Learning.ViewModels
         #endregion
 
         /*-------------------------------------------------------------------------------------------*/
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticsViewModel Statistics)
         {
 
 
             #region CountriesStatistics
 
-            CountriesStatistics = new CountriesStatisticsViewModel(this);
+            CountriesStatistics = Statistics;
+            CountriesStatistics.MainModel = this;
 
             //CountriesStatistics = new CountriesStatisticsViewModel(this);
             #endregion
