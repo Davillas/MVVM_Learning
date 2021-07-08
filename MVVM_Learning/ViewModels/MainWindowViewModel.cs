@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Printing;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -202,6 +204,11 @@ namespace MVVM_Learning.ViewModels
 
         /// <summary>Логика выполнения - Start Process</summary>
         private void OnStartProcessCommandExecuted(object p)
+        {
+            new Thread(ComputeValue).Start();
+        }
+
+        private void ComputeValue()
         {
             DateValue = _asyncData.GetResult(DateTime.Now);
         }
