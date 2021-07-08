@@ -157,8 +157,21 @@ namespace MVVM_Learning.ViewModels
         }
 
         #endregion
+
+
+        #region Coefficient : double - Coefficient
+
+        /// <summary>Coefficient</summary>
+        private double _Coefficient = 1;
         
-      
+        /// <summary>Coefficient</summary>
+        public double Coefficient
+        {
+            get => _Coefficient;
+            set => Set(ref _Coefficient, value);
+        }
+
+        #endregion
         /*-------------------------------------------------------------------------------------------*/
 
         #region Commands

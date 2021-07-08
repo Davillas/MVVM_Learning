@@ -8,6 +8,7 @@
         xmlns:dean="clr-namespace:MVVM_Learning.Models.DeanOffice"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:conv="clr-namespace:MVVM_Learning.Infrastructure.Converters"
         xmlns:local="clr-namespace:MVVM_Learning"
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
@@ -126,6 +127,9 @@
             </TabItem>
             <TabItem Header="Tab6" >
                 <Grid>
+                    <Grid.Resources>
+                        <conv:ParametricRatioConverter x:Key="ParamRatConv" Value="{Binding Coefficient}"/>
+                    </Grid.Resources>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="17*"/>
                         <ColumnDefinition Width="380*"/>
@@ -134,11 +138,19 @@
                                                HorizontalAlignment="Left" 
                                                Width="300" Height="300" 
                                                Grid.Column="1" 
-                                               Margin="213,0,0,0"
-                                               Value="{Binding FuelIndicator}"/>
+                                               Margin="213,0,0,0">
+                        <components:GaugeIndicator.Value>
+                            <Binding Path="FuelIndicator" Converter="{StaticResource ParamRatConv}"/>
+                        </components:GaugeIndicator.Value>
+                    </components:GaugeIndicator>
                     <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" 
-                            Minimum="-20" Maximum="120"
-                            Value="{Binding FuelIndicator}"></Slider>
+                            Minimum="0" Maximum="100"
+                            Value="{Binding FuelIndicator}"
+                            ToolTip="{Binding FuelIndicator}"/>
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" 
+                            Minimum="-10" Maximum="10" Margin="0,40,0,0" SmallChange="0.1"
+                            Value="{Binding Coefficient}"
+                            ToolTip="{Binding Coefficient}"/>
                 </Grid>
             </TabItem>
         </TabControl>
