@@ -123,7 +123,20 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="Tab6" Visibility="Collapsed"></TabItem>
+            <TabItem Header="Debugger" >
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1" >
+                            <Button Margin="5" Padding="20,5" Content="Start" Command="{Binding StartProcessCommand}"/>
+                            <Button Margin="5" Padding="20,5" Content="Stop"></Button>
+                        </UniformGrid>
+                        <ProgressBar DockPanel.Dock="Top" Margin="10" ></ProgressBar>
+                    </DockPanel>
+                    <Grid>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding DateValue}" Width="500" FontSize="30"/>
+                    </Grid>
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

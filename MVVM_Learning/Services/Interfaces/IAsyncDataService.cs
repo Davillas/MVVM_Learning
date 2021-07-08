@@ -6,5 +6,6 @@ namespace MVVM_Learning.Services
 {
     internal interface IAsyncDataService
     {
+        string GetResult(DateTime Time);
     }
 }
