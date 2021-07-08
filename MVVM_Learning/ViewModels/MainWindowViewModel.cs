@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
+using MVVM_Learning.Services;
 using OxyPlot;
 using DataPoint = MVVM_Learning.Models.DataPoint;
 
@@ -22,7 +23,7 @@ namespace MVVM_Learning.ViewModels
     internal class MainWindowViewModel : BaseViewModel
     {
 
-
+        private readonly IAsyncDataService _asyncData;
         /*-------------------------------------------------------------------------------------------*/
 
         public CountriesStatisticsViewModel CountriesStatistics {get;}
@@ -174,9 +175,9 @@ namespace MVVM_Learning.ViewModels
         #endregion
 
         /*-------------------------------------------------------------------------------------------*/
-        public MainWindowViewModel(CountriesStatisticsViewModel Statistics)
+        public MainWindowViewModel(CountriesStatisticsViewModel Statistics, IAsyncDataService asyncData)
         {
-
+            _asyncData = asyncData;
 
             #region CountriesStatistics
 
