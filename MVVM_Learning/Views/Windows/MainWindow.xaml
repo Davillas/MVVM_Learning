@@ -11,6 +11,7 @@
         xmlns:local="clr-namespace:MVVM_Learning"
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:components="clr-namespace:MVVM_Learning.Components"
         Title="{Binding Path=Title}" 
         DataContext="{Binding MainWindowVModel, Source={StaticResource Locator}}"
         Width="800" Height="450" >
@@ -21,9 +22,9 @@
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
 
     </Window.Resources>
-    
 
-        <DockPanel>
+
+    <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <!--<MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}">/-->
@@ -123,7 +124,23 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="Tab6" Visibility="Collapsed"></TabItem>
+            <TabItem Header="Tab6" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="380*"/>
+                    </Grid.ColumnDefinitions>
+                    <components:GaugeIndicator VerticalAlignment="Top" 
+                                               HorizontalAlignment="Left" 
+                                               Width="300" Height="300" 
+                                               Grid.Column="1" 
+                                               Margin="213,0,0,0"
+                                               Value="{Binding FuelIndicator}"/>
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Column="1" 
+                            Minimum="-20" Maximum="120"
+                            Value="{Binding FuelIndicator}"></Slider>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

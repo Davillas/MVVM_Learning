@@ -144,6 +144,19 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        #region FuelIndicator : double - Amount of Fuel
+
+        /// <summary>Amount of Fuel</summary>
+        private double _FuelIndicator;
+
+        /// <summary>Amount of Fuel</summary>
+        public double FuelIndicator
+        {
+            get => _FuelIndicator;
+            set => Set(ref _FuelIndicator, value);
+        }
+
+        #endregion
         
       
         /*-------------------------------------------------------------------------------------------*/
