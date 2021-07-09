@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM_Learning", "MVVM_Learn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{696A3FDF-9E95-4F03-9305-BCAA97B72621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_Console", "MVVM_Console\MVVM_Console.csproj", "{7EFE1A6C-E00D-4170-86AC-E03EF72D723F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM_Console", "MVVM_Console\MVVM_Console.csproj", "{7EFE1A6C-E00D-4170-86AC-E03EF72D723F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_TestApp", "WPF_TestApp\WPF_TestApp.csproj", "{AFD98A2C-2DD7-4950-91D0-27BF81AAF47D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TestApp", "WPF_TestApp\WPF_TestApp.csproj", "{AFD98A2C-2DD7-4950-91D0-27BF81AAF47D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_WebLib", "MVVM_WebLib\MVVM_WebLib.csproj", "{DC4ABC85-2B7D-4B37-95ED-4A4227F022B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{AFD98A2C-2DD7-4950-91D0-27BF81AAF47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFD98A2C-2DD7-4950-91D0-27BF81AAF47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFD98A2C-2DD7-4950-91D0-27BF81AAF47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC4ABC85-2B7D-4B37-95ED-4A4227F022B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC4ABC85-2B7D-4B37-95ED-4A4227F022B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC4ABC85-2B7D-4B37-95ED-4A4227F022B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC4ABC85-2B7D-4B37-95ED-4A4227F022B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
