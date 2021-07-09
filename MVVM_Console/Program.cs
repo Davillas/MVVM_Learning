@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 namespace MVVM_Console
 {
     class Program
     {
-
+        private static bool __ThreadUpdate = true;
         static void Main(string[] args)
         {
             Thread.CurrentThread.Name = "Main Thread";
@@ -16,13 +17,37 @@ namespace MVVM_Console
 
             thread.Start(42);
 
-            var cnt = 5;
-            var msg = "Hi!";
-            var timeout = 150;
+            //var cnt = 5;
+            //var msg = "Hi!";
+            //var timeout = 150;
 
-            new Thread(() => PrintMethod(msg, cnt, timeout)) {IsBackground = true}.Start();
+            //new Thread(() => PrintMethod(msg, cnt, timeout)) {IsBackground = true}.Start();
 
-            CheckThread();
+            //CheckThread();
+
+            var values = new List<int>();
+
+            var threads = new Thread[10];
+            object lock_object = new object();
+            for (var i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(
+                    () =>
+                    {
+                        for (var j = 0; j < 10; j++)
+                            lock(lock_object)
+                                values.Add(Thread.CurrentThread.ManagedThreadId);
+
+                    });
+            }
+
+            foreach (var thread in threads)
+                thread.Start();
+
+
+
+            Console.ReadLine();
+            Console.WriteLine(String.Join(",", values));
             Console.ReadLine();
         }
 
@@ -42,6 +67,14 @@ namespace MVVM_Console
             Console.WriteLine(value);
 
             CheckThread();
+
+            while (__ThreadUpdate)
+            {
+                Thread.Sleep(100);
+                Console.Title = DateTime.Now.ToString();
+            }
+                
+
         }
 
         private static void CheckThread()
