@@ -10,6 +10,8 @@ namespace MVVM_Console
         private static bool __ThreadUpdate = true;
         static void Main(string[] args)
         {
+            WebServerTest.Run();
+            return;
             //Thread.CurrentThread.Name = "Main Thread";
 
             //var thread = new Thread(ThreadMethod);
