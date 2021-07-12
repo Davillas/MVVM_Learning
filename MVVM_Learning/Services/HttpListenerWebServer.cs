@@ -21,7 +21,7 @@ namespace MVVM_Learning.Services
         private static void OnRequestReceived(object sender, RequestReceiverEventArgs e)
         {
             using var writer = new StreamWriter(e.Context.Response.OutputStream);
-            writer.WriteLine("WebServer App");
+            writer.WriteLine("WebServer App - " + DateTime.Now);
         }
     }
 }

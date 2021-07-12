@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MVVM_WebLib
 {
@@ -42,7 +43,7 @@ namespace MVVM_WebLib
 
                 _Listener = new HttpListener();
                 _Listener.Prefixes.Add($"http://*:{_Port}/"); // netsh http add urlacl url=http://*:8080/ user=user_name
-                _Listener.Prefixes.Add($"http://+:{_Port}/"); // netsh http add urlacl url=http://*:8080/ user=user_name
+                _Listener.Prefixes.Add($"http://+:{_Port}/"); // netsh http add urlacl url=http://+:8080/ user=user_name
                 _Enabled = true;
 
                 ListenAsync();
@@ -65,22 +66,21 @@ namespace MVVM_WebLib
             var listener = _Listener;
 
             listener.Start();
-
+            HttpListenerContext context = null;
             while (_Enabled)
             {
-                var context = await listener.GetContextAsync().ConfigureAwait(false);
-
-                ProcessRequest(context);
-
-                
+                var get_context_task = listener.GetContextAsync();
+                if (context != null) 
+                    ProcessRequestAsync(context);
+                context = await get_context_task.ConfigureAwait(false);
             }
             
-            _Listener.Stop();
+            listener.Stop();
         }
 
-        private void ProcessRequest(HttpListenerContext context)
+        private async void ProcessRequestAsync(HttpListenerContext context)
         {
-            RequestReceived?.Invoke(this, new RequestReceiverEventArgs(context));
+            await Task.Run(() => RequestReceived?.Invoke(this, new RequestReceiverEventArgs(context)));
         }
 
         
