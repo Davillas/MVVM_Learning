@@ -18,8 +18,12 @@ namespace MVVM_Learning.ViewModels
 
         public bool Enabled
         {
-            get => _Enabled;
-            set => Set(ref _Enabled, value); 
+            get => _Server.Enabled;
+            set
+            {
+                _Server.Enabled = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
@@ -39,7 +43,8 @@ namespace MVVM_Learning.ViewModels
         /// <summary>Логика выполнения - Summary</summary>
         private void OnStartCommandExecuted(object p)
         {
-            Enabled = true;
+            _Server.Start();
+            OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
@@ -66,7 +71,8 @@ namespace MVVM_Learning.ViewModels
 
         public WebServerViewModel(IWebServerService Server)
         {
-            _Server = Server;
+            _Server.Stop();
+            OnPropertyChanged(nameof(Enabled));
         }
     }
 }
