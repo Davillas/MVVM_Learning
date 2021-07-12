@@ -34,9 +34,19 @@
                     </MenuItem.Command>
                 </MenuItem>-->
             </MenuItem>
+            <MenuItem Header="Service">
+                <MenuItem Header="WebServer" DataContext="{Binding WebServer}">
+                    <MenuItem Header="Started" IsCheckable="True" IsChecked="{Binding Enabled}"/>
+                    <Separator/>
+                    <MenuItem Header="Turn On" Command="{Binding StartCommand}"></MenuItem>
+                    <MenuItem Header="Turn Off" Command="{Binding StopCommand}"></MenuItem>
+
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>
             </MenuItem>
+            
             <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
                 <MenuItem.Header>
                     <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>

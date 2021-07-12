@@ -29,8 +29,9 @@ namespace MVVM_Learning.ViewModels
         /*-------------------------------------------------------------------------------------------*/
 
         public CountriesStatisticsViewModel CountriesStatistics {get;}
+        public WebServerViewModel WebServer { get; }
 
-    /*---------------------------------------Properties----------------------------------------------------*/
+        /*---------------------------------------Properties----------------------------------------------------*/
 
         
 
@@ -238,10 +239,10 @@ namespace MVVM_Learning.ViewModels
         #endregion
 
         /*-------------------------------------------------------------------------------------------*/
-        public MainWindowViewModel(CountriesStatisticsViewModel Statistics, IAsyncDataService asyncData)
+        public MainWindowViewModel(CountriesStatisticsViewModel Statistics, IAsyncDataService asyncData, WebServerViewModel WebServer)
         {
             _asyncData = asyncData;
-
+            this.WebServer = WebServer;
             #region CountriesStatistics
 
             CountriesStatistics = Statistics;
