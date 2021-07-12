@@ -34,9 +34,19 @@
                     </MenuItem.Command>
                 </MenuItem>-->
             </MenuItem>
+            <MenuItem Header="Service">
+                <MenuItem Header="WebServer" DataContext="{Binding WebServer}">
+                    <MenuItem Header="Started" IsCheckable="True" IsChecked="{Binding Enabled}"/>
+                    <Separator/>
+                    <MenuItem Header="Turn On" Command="{Binding StartCommand}"></MenuItem>
+                    <MenuItem Header="Turn Off" Command="{Binding StopCommand}"></MenuItem>
+
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>
             </MenuItem>
+            
             <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
                 <MenuItem.Header>
                     <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
@@ -123,7 +133,20 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="Tab6" Visibility="Collapsed"></TabItem>
+            <TabItem Header="Debugger" >
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1" >
+                            <Button Margin="5" Padding="20,5" Content="Start" Command="{Binding StartProcessCommand}"/>
+                            <Button Margin="5" Padding="20,5" Content="Stop"></Button>
+                        </UniformGrid>
+                        <ProgressBar DockPanel.Dock="Top" Margin="10" ></ProgressBar>
+                    </DockPanel>
+                    <Grid>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding DateValue}" Width="500" FontSize="30"/>
+                    </Grid>
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

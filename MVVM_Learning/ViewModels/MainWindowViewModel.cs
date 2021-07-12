@@ -8,11 +8,14 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Printing;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
+using MVVM_Learning.Services;
 using OxyPlot;
 using DataPoint = MVVM_Learning.Models.DataPoint;
 
@@ -22,12 +25,13 @@ namespace MVVM_Learning.ViewModels
     internal class MainWindowViewModel : BaseViewModel
     {
 
-
+        private readonly IAsyncDataService _asyncData;
         /*-------------------------------------------------------------------------------------------*/
 
         public CountriesStatisticsViewModel CountriesStatistics {get;}
+        public WebServerViewModel WebServer { get; }
 
-    /*-------------------------------------------------------------------------------------------*/
+        /*---------------------------------------Properties----------------------------------------------------*/
 
         
 
@@ -144,7 +148,19 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
-        
+        #region DataValue : string - Result of long async operation
+
+        /// <summary>Result of long async operation</summary>
+        private string _DateValue;
+
+        /// <summary>Result of long async operation</summary>
+        public string DateValue
+        {
+            get => _DateValue;
+            set => Set(ref _DateValue, value);
+        }
+
+        #endregion
       
         /*-------------------------------------------------------------------------------------------*/
 
@@ -161,6 +177,8 @@ namespace MVVM_Learning.ViewModels
         }
         #endregion
 
+        #region ChangeTabIndexCommand
+
         public ICommand ChangeTabIndexCommand { get; }
 
         private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
@@ -173,11 +191,58 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
-        /*-------------------------------------------------------------------------------------------*/
-        public MainWindowViewModel(CountriesStatisticsViewModel Statistics)
+        #region Command StartProcessCommand - Start Process
+
+        /// <summary>Start Process</summary>
+        public ICommand StartProcessCommand { get; }
+
+        ///// <summary>Start Process</summary>
+        //public ICommand StartProcessCommand => _StartProcessCommand
+        //    ??= new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+
+        /// <summary>Проверка возможности выполнения - Start Process</summary>
+        private static bool CanStartProcessCommandExecute(object p) => true;
+
+        /// <summary>Логика выполнения - Start Process</summary>
+        private void OnStartProcessCommandExecuted(object p)
         {
+            new Thread(ComputeValue).Start();
+        }
 
+        private void ComputeValue()
+        {
+            DateValue = _asyncData.GetResult(DateTime.Now);
+        }
 
+        #endregion
+
+        #region Command StopProcessCommand - Stop the Process
+
+        /// <summary>Stop the Process</summary>
+        public ICommand StopProcessCommand { get; }
+
+        ///// <summary>Stop the Process</summary>
+        //public ICommand StopProcessCommand => _StopProcessCommand
+        //    ??= new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
+
+        /// <summary>Проверка возможности выполнения - Stop the Process</summary>
+        private bool CanStopProcessCommandExecute(object p) => true;
+
+        /// <summary>Логика выполнения - Stop the Process</summary>
+        private void OnStopProcessCommandExecuted(object p)
+        {
+            
+        }
+
+        #endregion
+
+        #endregion
+
+        /*-------------------------------------------------------------------------------------------*/
+        public MainWindowViewModel(CountriesStatisticsViewModel Statistics, IAsyncDataService asyncData, WebServerViewModel WebServer)
+        {
+            _asyncData = asyncData;
+            this.WebServer = WebServer;
             #region CountriesStatistics
 
             CountriesStatistics = Statistics;
@@ -185,11 +250,14 @@ namespace MVVM_Learning.ViewModels
 
             //CountriesStatistics = new CountriesStatisticsViewModel(this);
             #endregion
+
             #region Commands
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
 
             #endregion
 

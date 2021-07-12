@@ -42,15 +42,10 @@ namespace MVVM_Learning
             __Host = null;
         }
 
-        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddTransient<IDataService, DataService>();
-            
-            services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<CountriesStatisticsViewModel>();
-
-            
-        }
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+                .RegisterServices()
+                .RegisterViewModels();
+        
 
         public static string CurrentDirectory => IsDesignMode ? Path.GetDirectoryName(GetSourceCodePath()) : Environment.CurrentDirectory;
 
