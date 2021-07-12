@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,50 @@ namespace WPF_TestApp.Behaviors
     {
         private Point _StartPoint;
         private Canvas _Canvas;
+
+        #region PositionX : double - Horizontal displacement
+
+        /// <summary>$summary$</summary>
+        public static readonly DependencyProperty PositionXProperty =
+            DependencyProperty.Register(
+                nameof(PositionX),
+                typeof(double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+        /// <summary>$summary$</summary>
+        //[Category("")]
+        [Description("Horizontal displacement")]
+        public double PositionX
+        {
+            get => (double) GetValue(PositionXProperty);
+            set => SetValue(PositionXProperty, value);
+        }
+
+        #endregion
+
+        #region PositionY : double - Vertical displacement
+
+        /// <summary>$summary$</summary>
+        public static readonly DependencyProperty PositionYProperty =
+            DependencyProperty.Register(
+                nameof(PositionY),
+                typeof(double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+        /// <summary>$summary$</summary>
+        //[Category("")]
+        [Description("Vertical displacement")]
+        public double PositionY
+        {
+            get => (double) GetValue(PositionYProperty);
+            set => SetValue(PositionYProperty, value);
+        }
+
+        #endregion
+
+
         protected override void OnAttached()
         {
             AssociatedObject.MouseLeftButtonDown += OnLeftButtonDown;
@@ -53,6 +98,9 @@ namespace WPF_TestApp.Behaviors
 
             obj.SetValue(Canvas.LeftProperty, delta.X);
             obj.SetValue(Canvas.TopProperty, delta.Y);
+
+            PositionX = delta.X;
+            PositionY = delta.Y;
         }
     }
 }
