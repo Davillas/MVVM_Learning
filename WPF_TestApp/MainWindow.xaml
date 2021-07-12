@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TestApp"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:WPF_TestApp.Behaviors"
+        Title="MainWindow" Height="450" Width="600">
     <Window.Resources>
         
     </Window.Resources>
@@ -12,9 +14,31 @@
         <Button VerticalAlignment="Center" 
                 HorizontalAlignment="Center"
                 Content="Start"
-                Padding="30,20" Click="StartButton_Click"/>
+                Padding="30,20">
+            <i:Interaction.Behaviors>
+                <i:MouseDragElementBehavior/>
+            </i:Interaction.Behaviors>
+        </Button>
 
         <TextBlock Name="ValueText" HorizontalAlignment="Center" 
-                   VerticalAlignment="Top" Text="None"></TextBlock>
+                   VerticalAlignment="Top" Text="None">
+            <i:Interaction.Behaviors>
+                <i:MouseDragElementBehavior/>
+            </i:Interaction.Behaviors>
+        </TextBlock>
+
+        <Canvas>
+            <Ellipse Canvas.Left="30" Canvas.Top="20"
+                     Stroke="Red" StrokeThickness="2"
+                     Fill="BlueViolet" 
+                     Width="20"
+                     Height="20">
+                <i:Interaction.Behaviors>
+                    <!--<i:MouseDragElementBehavior/>-->
+                    <b:DragInCanvas/>
+
+                </i:Interaction.Behaviors>
+            </Ellipse>
+        </Canvas>
     </Grid>
 </Window>
