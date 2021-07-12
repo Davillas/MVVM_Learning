@@ -11,9 +11,15 @@
         xmlns:local="clr-namespace:MVVM_Learning"
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="{Binding Path=Title}" 
         DataContext="{Binding MainWindowVModel, Source={StaticResource Locator}}"
-        Width="800" Height="450" >
+        Width="800" Height="450">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CountriesStatistics.RefreshDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
