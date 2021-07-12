@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\WindowIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
 
@@ -21,6 +25,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MVVM_WebLib\MVVM_WebLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\WindowIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
