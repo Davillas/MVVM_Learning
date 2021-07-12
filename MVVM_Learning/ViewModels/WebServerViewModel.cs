@@ -64,15 +64,15 @@ namespace MVVM_Learning.ViewModels
         /// <summary>Логика выполнения - Summary</summary>
         private void OnStopCommandExecuted(object p)
         {
-            Enabled = false;
+            _Server.Stop();
+            OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
 
         public WebServerViewModel(IWebServerService Server)
         {
-            _Server.Stop();
-            OnPropertyChanged(nameof(Enabled));
+            _Server = Server;
         }
     }
 }
