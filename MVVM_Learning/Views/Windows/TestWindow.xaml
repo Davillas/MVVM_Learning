@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVM_Learning.Views.Windows"
         Style="{StaticResource MVVMWindowStyle}"
+        WindowStyle="None"
         Title="TestWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,40" Padding="20,5">Hello World!</Button>
+
+        <Canvas>
+            <Ellipse Canvas.Left="20" Canvas.Top="20" StrokeThickness="1" 
+                     Stroke="LightCoral" Fill="Aquamarine" 
+                     Width="40" Height="20"></Ellipse>
+        </Canvas>
     </Grid>
 </Window>
