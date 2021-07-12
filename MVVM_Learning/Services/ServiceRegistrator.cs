@@ -15,6 +15,8 @@ namespace MVVM_Learning.Services
 
             services.AddTransient<IAsyncDataService, AsyncDataService>();
 
+            services.AddTransient<IWebServerService, HttpListenerWebServer>();
+
             return services;
         }
     }

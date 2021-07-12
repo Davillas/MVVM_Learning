@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using MVVM_Learning.Infrastructure.Commands;
+using MVVM_Learning.Services.Interfaces;
 using MVVM_Learning.ViewModels.Base;
 
 namespace MVVM_Learning.ViewModels
 {
     internal class WebServerViewModel : BaseViewModel
     {
+        private readonly IWebServerService _Server;
+
         #region Enabled
 
         private bool _Enabled;
@@ -60,5 +63,10 @@ namespace MVVM_Learning.ViewModels
         }
 
         #endregion
+
+        public WebServerViewModel(IWebServerService Server)
+        {
+            _Server = Server;
+        }
     }
 }
