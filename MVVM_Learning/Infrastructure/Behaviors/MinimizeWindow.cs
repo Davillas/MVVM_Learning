@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Microsoft.Xaml.Behaviors;
 
 namespace MVVM_Learning.Infrastructure.Behaviors
 {
-    class CloseWindow : Behavior<Button>
+    internal class MinimizeWindow : Behavior<Button>
     {
         protected override void OnAttached()
         {
@@ -18,6 +17,12 @@ namespace MVVM_Learning.Infrastructure.Behaviors
         {
             AssociatedObject.Click -= OnButtonClick;
         }
-        private void OnButtonClick(object sender, RoutedEventArgs e) => (AssociatedObject.FindVisualRoot() as Window)?.Close();
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
+
+            window.WindowState = WindowState.Minimized;
+
+        }
     }
 }
