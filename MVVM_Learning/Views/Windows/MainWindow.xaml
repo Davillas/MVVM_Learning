@@ -12,6 +12,8 @@
         xmlns:view="clr-namespace:MVVM_Learning.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        Icon="../../Resources/WindowIcon.ico"
+        Style="{StaticResource MVVMWindowStyle}"
         Title="{Binding Path=Title}" 
         DataContext="{Binding MainWindowVModel, Source={StaticResource Locator}}"
         Width="800" Height="450">
