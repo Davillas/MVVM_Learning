@@ -27,9 +27,33 @@ namespace MVVM_Learning.Infrastructure.Behaviors
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ClickCount > 1) return;
+            
+            switch (e.ClickCount)
+            {
+                case 1:
+                    DragMove();
+                    break;
+                default:
+                    Maximize();
+                    break;
+            }
+        }
+
+        private void DragMove()
+        {
             if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
             window.DragMove();
+        }
+
+        private void Maximize()
+        {
+            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
+            window.WindowState = window.WindowState switch
+            {
+                WindowState.Normal => WindowState.Maximized,
+                WindowState.Maximized => WindowState.Normal,
+                _ => window.WindowState
+            };
         }
     }
 }
