@@ -12,6 +12,7 @@ namespace MVVM_Learning.ViewModels
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<CountriesStatisticsViewModel>();
             services.AddSingleton<WebServerViewModel>();
+            services.AddTransient<StudentManagementViewModel>();
             return services;
         }
     }

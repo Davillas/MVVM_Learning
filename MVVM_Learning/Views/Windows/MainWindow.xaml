@@ -50,6 +50,12 @@
                     <MenuItem Header="Turn Off" Command="{Binding StopCommand}"></MenuItem>
 
                 </MenuItem>
+                <Separator/>
+                <MenuItem Header="Student Management">
+                    <MenuItem.Command>
+                        <cmd:ManageStudentCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About..."/>

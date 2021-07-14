@@ -8,5 +8,7 @@ namespace MVVM_Learning.ViewModels
     internal class ViewModelLocator
     {
         public MainWindowViewModel MainWindowVModel => App.Host.Services.GetRequiredService<MainWindowViewModel>();
+
+        public StudentManagementViewModel StudentManagement => App.Host.Services.GetRequiredService<StudentManagementViewModel>();
     }
 }
