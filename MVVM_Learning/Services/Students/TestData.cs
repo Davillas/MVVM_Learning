@@ -29,7 +29,7 @@ namespace MVVM_Learning.Services.Students
                         Surname= $"Surname {index}",
                         Patronymic = $"Patronymic {index++}",
                         BirthDay = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19,30))),
-                        Rating = rnd.Next() * 100
+                        Rating = rnd.NextDouble() * 100
                     });
             return groups.SelectMany(g => g.Students).ToArray();
         }

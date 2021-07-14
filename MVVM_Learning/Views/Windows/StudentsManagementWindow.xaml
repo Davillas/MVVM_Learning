@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVM_Learning.Views.Windows"
+        xmlns:deanOffice="clr-namespace:MVVM_Learning.Models.DeanOffice"
         DataContext="{Binding StudentManagement,Source={StaticResource Locator}}"
         
         Title="{Binding Title}" Height="450" Width="800">
@@ -15,11 +16,45 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Header="Groups">
-            <ListBox/>
+            <ListBox ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" SelectedIndex="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="deanOffice:Group">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Right" Text="{Binding Students.Count, StringFormat=({0}}"></TextBlock>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Students">
-            <ListBox/>
+            <ListBox ItemsSource="{Binding SelectedGroup.Students}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="deanOffice:Student">
+                        <TextBlock>
+                            <TextBlock.ToolTip>
+                                <TextBlock>
+                                    GPA: <TextBlock Text="{Binding Rating}"/>
+                                </TextBlock>
+                            </TextBlock.ToolTip>
+                            <TextBlock Text="{Binding Surname}"></TextBlock>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Patronymic}"></TextBlock>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </GroupBox>
         <GroupBox Grid.Column="2" Header="Info">
