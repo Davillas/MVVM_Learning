@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using MVVM_Learning.Infrastructure.Commands;
 using MVVM_Learning.Models.DeanOffice;
 using MVVM_Learning.Services.Students;
 using MVVM_Learning.ViewModels.Base;
+using MVVM_Learning.Views.Windows;
 
 namespace MVVM_Learning.ViewModels
 {
@@ -96,7 +99,19 @@ namespace MVVM_Learning.ViewModels
         {
             var student = (Student) p;
 
+            var dlg = new StudentEditorWindow
+            {
+                FirstName = student.Name,
+                LastName = student.Surname,
+                Patronymic = student.Patronymic,
+                Rating = student.Rating,
+                BirthDay = student.BirthDay,
+            };
 
+            if (dlg.ShowDialog() == true)
+                MessageBox.Show("Editing Done");
+            else
+                MessageBox.Show("Cancellation Done");
         }
 
         #endregion
