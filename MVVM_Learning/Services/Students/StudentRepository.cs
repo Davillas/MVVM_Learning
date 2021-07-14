@@ -4,7 +4,7 @@ using System.Text;
 using MVVM_Learning.Models.DeanOffice;
 using MVVM_Learning.Services.Base;
 
-namespace MVVM_Learning.Services
+namespace MVVM_Learning.Services.Students
 {
     class StudentRepository : RepositoryInMemory<Student>
     {
@@ -16,14 +16,6 @@ namespace MVVM_Learning.Services
             Destination.BirthDay = Source.BirthDay;
             Destination.Rating = Source.Rating;
 
-        }
-    }
-    class GroupRepository : RepositoryInMemory<Group>
-    {
-        protected override void Update(Group Source, Group Destination)
-        {
-            Destination.Name = Source.Name;
-            Destination.Description = Source.Description;
         }
     }
 }
