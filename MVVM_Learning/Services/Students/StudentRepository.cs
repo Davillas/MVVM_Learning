@@ -8,6 +8,8 @@ namespace MVVM_Learning.Services.Students
 {
     class StudentRepository : RepositoryInMemory<Student>
     {
+        public StudentRepository() : base(TestData.Students) {}
+        
         protected override void Update(Student Source, Student Destination)
         {
             Destination.Name = Source.Name;
