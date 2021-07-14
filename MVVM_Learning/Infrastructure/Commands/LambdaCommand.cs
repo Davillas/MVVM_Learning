@@ -17,6 +17,10 @@ namespace MVVM_Learning.Infrastructure.Commands
 
         public override bool CanExecute(object parameter) => _CanExecute?.Invoke(parameter) ?? true;
 
-        public override void Execute(object parameter) => _Execute(parameter);
+        public override void Execute(object parameter)
+        {
+            if (!CanExecute(parameter)) return;
+            _Execute(parameter);
+        }
     }
 }
