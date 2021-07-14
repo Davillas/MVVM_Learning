@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
+using MVVM_Learning.Models.Interfaces;
 
 namespace MVVM_Learning.Models.DeanOffice
 {
-    internal class Student
+    internal class Student : IEntity
     {
+
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Surname { get; set; }
@@ -18,14 +20,5 @@ namespace MVVM_Learning.Models.DeanOffice
 
         public string Description { get; set; }
 
-    }
-
-    internal class Group
-    {
-        public string Name { get; set; }
-
-        public IList<Student> Students { get; set; }
-
-        public string Description { get; set; }
     }
 }

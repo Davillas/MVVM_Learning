@@ -17,6 +17,9 @@ namespace MVVM_Learning.Services
 
             services.AddTransient<IWebServerService, HttpListenerWebServer>();
 
+            services.AddSingleton<StudentRepository>();
+            services.AddSingleton<GroupRepository>();
+
             return services;
         }
     }
