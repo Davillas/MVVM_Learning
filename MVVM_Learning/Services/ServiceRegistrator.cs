@@ -20,6 +20,7 @@ namespace MVVM_Learning.Services
 
             services.AddSingleton<StudentRepository>();
             services.AddSingleton<GroupRepository>();
+            services.AddSingleton<StudentsManager>();
 
             return services;
         }
