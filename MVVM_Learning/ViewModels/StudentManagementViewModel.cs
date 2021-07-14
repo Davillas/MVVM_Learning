@@ -41,6 +41,19 @@ namespace MVVM_Learning.ViewModels
 
         #endregion
 
+        #region SelectedStudent : Student - Selected Student in a Group
+
+        /// <summary>Selected Student in a Group</summary>
+        private Student _SelectedStudent;
+
+        /// <summary>Selected Student in a Group</summary>
+        public Student SelectedStudent
+        {
+            get => _SelectedStudent;
+            set => Set(ref _SelectedStudent, value);
+        }
+
+        #endregion
 
         public StudentManagementViewModel(StudentsManager StudentsManager) => _StudentsManager = StudentsManager;
     }
