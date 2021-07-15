@@ -22,10 +22,10 @@ namespace MVVM_Learning.Views.Windows
         public static DependencyProperty NameProperty = DependencyProperty.Register(
             nameof(FirstName),
             typeof(string),
-            typeof(StudentsManagementWindow),
-            new PropertyMetadata(null));
+            typeof(StudentEditorWindow),
+            new PropertyMetadata(default(string)));
 
-        public string FirstName { get; set; }
+        public string FirstName { get => (string)GetValue(NameProperty); set => SetValue(NameProperty, value); }
         #endregion
 
         #region LastName : string - Surname

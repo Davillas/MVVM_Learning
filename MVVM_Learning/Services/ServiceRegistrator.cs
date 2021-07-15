@@ -22,6 +22,8 @@ namespace MVVM_Learning.Services
             services.AddSingleton<GroupRepository>();
             services.AddSingleton<StudentsManager>();
 
+            services.AddTransient<IUserDialogService, WindowsUserDialogService>();
+
             return services;
         }
     }

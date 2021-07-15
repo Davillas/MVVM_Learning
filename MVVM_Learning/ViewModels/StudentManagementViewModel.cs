@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using MVVM_Learning.Infrastructure.Commands;
 using MVVM_Learning.Models.DeanOffice;
+using MVVM_Learning.Services.Interfaces;
 using MVVM_Learning.Services.Students;
 using MVVM_Learning.ViewModels.Base;
 using MVVM_Learning.Views.Windows;
@@ -15,6 +16,8 @@ namespace MVVM_Learning.ViewModels
     class StudentManagementViewModel : BaseViewModel
     {
         private readonly StudentsManager _StudentsManager;
+        private readonly IUserDialogService _UserDialog;
+
         #region Title : string - Title
 
         /// <summary>Title</summary>
@@ -78,7 +81,20 @@ namespace MVVM_Learning.ViewModels
         private void OnAddStudentCommandExecuted(object p)
         {
             var group = (Group) p;
+
+            var student = new Student();
+
+            if (_UserDialog.Edit(student) || _StudentsManager.Create(student, group.Name))
+            {
+                OnPropertyChanged(nameof(Students));
+                return;
+            }
+            
+            if (_UserDialog.Confirm("Could not create student. Repeat?", "Student Manager"))
+                        OnAddStudentCommandExecuted(p);
+                        
         }
+        
 
         #endregion
 
@@ -97,27 +113,27 @@ namespace MVVM_Learning.ViewModels
         /// <summary>Логика выполнения - Edit Student</summary>
         private void OnEditStudentCommandExecuted(object p)
         {
-            var student = (Student) p;
 
-            var dlg = new StudentEditorWindow
+            if (_UserDialog.Edit(p))
             {
-                FirstName = student.Name,
-                LastName = student.Surname,
-                Patronymic = student.Patronymic,
-                Rating = student.Rating,
-                BirthDay = student.BirthDay,
-            };
+                _StudentsManager.Update((Student) p);
 
-            if (dlg.ShowDialog() == true)
-                MessageBox.Show("Editing Done");
+                _UserDialog.ShowInformation("Student has been edited", "Student Manager");
+            }
             else
-                MessageBox.Show("Cancellation Done");
+                _UserDialog.ShowWarning("Edit Cancellation", "Student Manager");
+                
+            
         }
 
         #endregion
 
         #endregion
 
-        public StudentManagementViewModel(StudentsManager StudentsManager) => _StudentsManager = StudentsManager;
+        public StudentManagementViewModel(StudentsManager StudentsManager, IUserDialogService UserDialog)
+        {
+            _StudentsManager = StudentsManager;
+            _UserDialog = UserDialog;
+        }
     }
 }
